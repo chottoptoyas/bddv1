@@ -16,13 +16,14 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 
 Route::group(['middleware'=>'auth'],function(){
 
     // Dashboard Route
-    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('user.dashboard');
+    Route::get('/dashboard', App\Http\Controllers\User\DashboardController::class)->name('user.dashboard');
 
     Route::resource('donation', App\Http\Controllers\User\DonationController::class);
 
